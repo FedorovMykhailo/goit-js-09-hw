@@ -44,7 +44,7 @@ const options = {
         })
       return date}
       
-        const interval = () => {
+      const interval = () => {
           const timeId = setInterval(()=>{if (countTimer()< 1000) { clearInterval(timeId)} else {countTimer}},1000)
         }
         
