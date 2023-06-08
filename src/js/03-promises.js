@@ -24,6 +24,10 @@ function createPromise(position, delay) {
 
 const onSubmit = (event) => {
   event.preventDefault();
+  console.log(refs.amount.value);
+  if (Number.parseInt(refs.amount.value)<0 || Number.parseInt(refs.step.value)<0 || Number.parseInt(refs.delay.value)<0)
+  {Notiflix.Notify.failure("Enter positive values ​​in all fields");}
+  else {
   let localDelay = Number.parseInt(refs.delay.value);
   const localStep = Number.parseInt(refs.step.value);
   for (let index = 1; index <= refs.amount.value; index++) {
@@ -33,7 +37,7 @@ const onSubmit = (event) => {
   .catch(({ position, delay }) => {
     Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
   }); 
-  localDelay += localStep;
+  localDelay += localStep;}
 }}
 
 refs.form.addEventListener('submit', onSubmit);
