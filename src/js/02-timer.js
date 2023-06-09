@@ -28,7 +28,9 @@ const interval = () => {
     refs.inputCalendar.setAttribute("disabled",true)
      timeId = setInterval(()=>{
       if (countTimer()< 1000) { 
-        clearInterval(timeId); refs.startBtn.removeEventListener('click',interval)
+        clearInterval(timeId); 
+        refs.startBtn.removeEventListener('click',interval)
+        refs.inputCalendar.removeAttribute("disabled")
       } 
       else {countTimer}},1000)
   return timeId}
@@ -45,7 +47,7 @@ const interval = () => {
 const countTimer = () => {
   const now = new Date();
   const date = choseDate.getTime()-now.getTime();
-  if (date<1000) {Notiflix.Notify.failure("Please rechoose a date in the future");}
+  if (date<100) {Notiflix.Notify.failure("Please rechoose a date in the future");}
   else {
   const dateCount = convertMs(choseDate.getTime()-now.getTime());
   refs.timer.forEach((el)=>{
