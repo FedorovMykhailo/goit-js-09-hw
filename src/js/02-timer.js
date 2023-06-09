@@ -37,7 +37,7 @@ const interval = () => {
     clearInterval(timeId);
     refs.timer.forEach((el)=>{
       const key = Object.keys(el.dataset).toString();
-      el.textContent = 0;
+      el.textContent = addLeadingZero(0);
       })
   }
 
