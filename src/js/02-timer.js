@@ -51,7 +51,7 @@ const countTimer = () => {
   const dateCount = convertMs(choseDate.getTime()-now.getTime());
   refs.timer.forEach((el)=>{
   const key = Object.keys(el.dataset).toString();
-  el.textContent = dateCount[key];
+  el.textContent = addLeadingZero (dateCount[key]);
   })}
 return date}
 
@@ -114,6 +114,13 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   return { days, hours, minutes, seconds };
+}
+
+function addLeadingZero(value)
+{
+  //console.log(value);
+
+  return  value.toString().padStart(2,"0")
 }
 
 console.log(refs.resetBtn);
