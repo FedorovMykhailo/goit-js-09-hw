@@ -25,6 +25,7 @@ let timeId
 
 const interval = () => {
     refs.startBtn.setAttribute("disabled",true)
+    refs.inputCalendar.setAttribute("disabled",true)
      timeId = setInterval(()=>{
       if (countTimer()< 1000) { 
         clearInterval(timeId); refs.startBtn.removeEventListener('click',interval)
@@ -33,18 +34,16 @@ const interval = () => {
   return timeId}
    
   const resetInterval = () => {
-    console.log(timeId);
     clearInterval(timeId);
     refs.timer.forEach((el)=>{
       const key = Object.keys(el.dataset).toString();
       el.textContent = addLeadingZero(0);
       })
+      refs.inputCalendar.removeAttribute("disabled")
   }
 
 const countTimer = () => {
   const now = new Date();
-  console.log(choseDate);
-  console.log(typeof choseDate);
   const date = choseDate.getTime()-now.getTime();
   if (date<1000) {Notiflix.Notify.failure("Please rechoose a date in the future");}
   else {
@@ -63,9 +62,6 @@ const options = {
   onClose(selectedDates) {
     choseDate = selectedDates[0]
       const now1 = new Date();
-      console.log(choseDate);
-      console.log(typeof now1.getTime());
-      console.log(typeof choseDate.getTime());
       if (choseDate < now1) {
         refs.startBtn.setAttribute('disabled','true');
         Notiflix.Notify.failure("Please choose a date in the future");        
@@ -118,9 +114,5 @@ function convertMs(ms) {
 
 function addLeadingZero(value)
 {
-  //console.log(value);
-
   return  value.toString().padStart(2,"0")
 }
-
-console.log(refs.resetBtn);
