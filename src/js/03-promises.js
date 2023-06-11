@@ -25,7 +25,7 @@ function createPromise(position, delay) {
 const onSubmit = (event) => {
   event.preventDefault();
   console.log(refs.amount.value);
-  if (Number.parseInt(refs.amount.value)<0 || Number.parseInt(refs.step.value)<0 || Number.parseInt(refs.delay.value)<0)
+  if (Number.parseInt(refs.amount.value)<0 || Number.parseInt(refs.step.value)<0 || Number.parseInt(refs.delay.value)<=0)
   {Notiflix.Notify.failure("Enter positive values ​​in all fields");}
   else {
   let localDelay = Number.parseInt(refs.delay.value);
