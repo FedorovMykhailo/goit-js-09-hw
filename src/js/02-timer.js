@@ -32,7 +32,7 @@ const interval = () => {
         refs.startBtn.removeEventListener('click',interval)
         refs.inputCalendar.removeAttribute("disabled")
       } 
-      else {countTimer}},1000)
+      else {countTimer()}},1000)
   return timeId}
    
   const resetInterval = () => {
@@ -91,16 +91,16 @@ const options = {
       //       else {countTimer}},1000)
       //   }
         
-        refs.startBtn.addEventListener('click', interval)
-        refs.resetBtn.addEventListener('click', resetInterval)
+        // refs.startBtn.addEventListener('click', interval)
+        // refs.resetBtn.addEventListener('click', resetInterval)
       }
   };
 
 refs.startBtn.setAttribute('disabled','true');
 const calendar = flatpickr(refs.inputCalendar, options);
 
-// refs.startBtn.addEventListener('click', interval)
-// refs.resetBtn.addEventListener('click', resetInterval)
+refs.startBtn.addEventListener('click', interval)
+refs.resetBtn.addEventListener('click', resetInterval)
 
 function convertMs(ms) {
   const second = 1000;

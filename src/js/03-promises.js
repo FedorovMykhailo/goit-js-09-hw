@@ -11,8 +11,7 @@ const refs = {
 function createPromise(position, delay) {
   return new Promise((resolve,reject) => {
     const shouldResolve = Math.random() > 0.3;
-    console.log(shouldResolve);
-    setTimeout( () =>{    
+    setTimeout(() =>{    
       if (shouldResolve) {
         resolve({position,delay});
       }
@@ -24,20 +23,26 @@ function createPromise(position, delay) {
 
 const onSubmit = (event) => {
   event.preventDefault();
-  console.log(refs.amount.value);
   if (Number.parseInt(refs.amount.value)<0 || Number.parseInt(refs.step.value)<0 || Number.parseInt(refs.delay.value)<=0)
-  {Notiflix.Notify.failure("Enter positive values ​​in all fields");}
+    {
+      Notiflix.Notify.failure("Enter positive values ​​in all fields");
+    }
   else {
-  let localDelay = Number.parseInt(refs.delay.value);
-  const localStep = Number.parseInt(refs.step.value);
-  for (let index = 1; index <= refs.amount.value; index++) {
-  createPromise(index, localDelay).then(({ position, delay }) => {
-    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-  }); 
-  localDelay += localStep;}
-}}
+    let localDelay = Number.parseInt(refs.delay.value);
+    const localStep = Number.parseInt(refs.step.value);
+    for (let index = 1; index <= refs.amount.value; index++) {
+      createPromise(index, localDelay)
+        .then(({ position, delay }) => {
+          Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        })
+        .catch(({ position, delay }) => {
+          Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        }); 
+      localDelay += localStep;
+      
+    }
+  }
+  refs.form.reset();
+}
 
 refs.form.addEventListener('submit', onSubmit);
